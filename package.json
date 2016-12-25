@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": " <kobestyle>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js -t 127.0.0.1:3000",
     "test": "node build/dev-server.js -d",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "link": "webpack ./build/webpack.dev.conf.js -w",
+    "gen": "rm -rf ./dist && webpack ./build/webpack.dev.conf.js"
   },
   "dependencies": {
     "element-ui": "^1.0.0",

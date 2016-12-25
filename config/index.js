@@ -1,6 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path');
-var type = process.argv[2].slice(1);
+var type = process.argv[2] && process.argv[2].slice(1);
 var mockUrl = process.argv[3];
 // console.log(type);
 // console.log(mockUrl);
@@ -31,7 +31,7 @@ module.exports = {
     productionGzipExtensions: ['js', 'css']
   },
   dev: {
-    env: require('./dev.env'),
+    env: type === 'd' ? require('./test.env') : require('./dev.env'),
     port: 8080,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
