@@ -2,10 +2,10 @@
 var path = require('path');
 var type = process.argv[2] && process.argv[2].slice(1);
 var mockUrl = process.argv[3];
-// console.log(type);
+
 // console.log(mockUrl);
 //'d' 和后端联调 't'本地mock
-var urls = type === 'd' ?  require('../src/api/mock') :  require('../src/api/mock_fe')
+var urls = type === 'd' ?  require('../src/api/mock') :  require('../src/api/mock_fe');
 var proxyTable = {};
 
 for(var i in urls) {
@@ -31,7 +31,7 @@ module.exports = {
     productionGzipExtensions: ['js', 'css']
   },
   dev: {
-    env: type === 'd' ? require('./test.env') : require('./dev.env'),
+    env: type !== 'd' ? require('./dev.env') : require('./test.env'),
     port: 8080,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

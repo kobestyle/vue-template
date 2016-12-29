@@ -12,7 +12,7 @@ const routes = [{
 }, {
     path: '/',
     component: {
-        template: 'this is init.'
+        template: '<div>this is init.</div>'
     },
     name: 'default'
 }];

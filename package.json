@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "node build/dev-server.js -t 127.0.0.1:3000",
     "test": "node build/dev-server.js -d",
-    "build": "node build/build.js",
+    "build": "rm -rf dist && node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "link": "webpack ./build/webpack.dev.conf.js -w",
-    "gen": "rm -rf ./dist && webpack ./build/webpack.dev.conf.js"
+    "clean": "rm -rf dist/",
+    "link": "webpack -d --config ./build/webpack.dev.conf.js --watch",
+    "gen": "npm run clean && webpack -d --config ./build/webpack.dev.conf.js"
   },
   "dependencies": {
+    "@ui/vue-jd-common": "^1.1.9",
     "element-ui": "^1.0.0",
+    "es6-object-assign": "^1.0.3",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.1",
