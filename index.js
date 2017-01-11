@@ -4,14 +4,7 @@ var app = require('koa')();
 var path = require('path');
 var router = require('koa-router')();
 var json = require('koa-json');
-
-
-app.use(function*(next) {
-    var start = new Date;
-    yield next;
-    var ms = new Date - start;
-    this.set('X-Response-Time', ms + 'ms')
-});
+var parse = require('co-body');
 
 app.use(function*(next) {
     var start = new Date;
@@ -23,9 +16,13 @@ app.use(function*(next) {
 app.use(json());
 
 router.post('/mock/*', function *() {
-    console.log(this.request.url);
-    var data = require(path.join(process.cwd(), this.request.url) + '.js')
-    this.body = data();
+    var contentType = this.req.headers['content-type'], body;
+    if(contentType === 'application/x-www-form-urlencoded') {
+      body = yield parse.form(this.req);
+    } else if(contentType === 'application/json') {
+      body = yield parse.json(this.req)
+    }
+    this.body = require(path.join(process.cwd(), this.request.url) + '.js')(body);
 });
 
 app.use(router.routes()).use(router.allowedMethods());

@@ -3,6 +3,7 @@ require('./check-versions')()
 require('shelljs/global')
 env.NODE_ENV = 'production'
 
+var fs = require('fs-extra')
 var path = require('path')
 var config = require('../config')
 var ora = require('ora')
@@ -33,4 +34,6 @@ webpack(webpackConfig, function (err, stats) {
     chunks: false,
     chunkModules: false
   }) + '\n')
+
+
 })
